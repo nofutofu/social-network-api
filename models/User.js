@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+// sets up the user schema with a userName, email, thoughts, friends
 const userSchema = new Schema({
     userName: { 
         type: String,
@@ -13,12 +14,14 @@ const userSchema = new Schema({
         unique: true, 
         match: /.+\@.+\..+/, 
     },
+    // creates an array of thoughts consisting of individual thought objects
     thoughts: [
     { 
         type: Schema.Types.ObjectId,
         ref: 'thought',
     },
     ],
+    // creates an array of friends consisting of individual users objects
     friends: [
     {
         type: Schema.Types.ObjectId,
@@ -27,6 +30,7 @@ const userSchema = new Schema({
     ],
     },
     {
+        // allows the use of virtuals
         toJSON: {
             virtuals: true,
         },
@@ -34,6 +38,7 @@ const userSchema = new Schema({
     }
 );
 
+// userSchema virtual to track number of friends a user has
 userSchema
     .virtual('friendCount')
     .get(function () {
