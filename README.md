@@ -4,11 +4,12 @@
 
 ## Links
 
-
+- [Demo Video](<https://watch.screencastify.com/v/tUThEcy9Axd0SQIRKmxJ> "Demo Video")
 
 ## Screenshots
 
-![](/assets/screenshots/1.png "")
+![Users](/assets/screenshots/1.png "Users list")
+![Thoughts](/assets/screenshots/2.png "Thoughts List")
 
 
 ## Built With
