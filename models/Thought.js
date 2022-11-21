@@ -11,7 +11,7 @@ const reactionSchema = new Schema({
         required: true,
         maxlength: 280,
     },
-    username: {
+    userName: {
         type: String,
         required: true,
     },
@@ -23,7 +23,6 @@ const reactionSchema = new Schema({
     },
     {
         toJSON: {
-            virtuals: true,
             getters: true,
         },
         id: false,
@@ -31,7 +30,7 @@ const reactionSchema = new Schema({
 );
 
 const thoughtSchema = new Schema({ 
-    thoughtTest: {
+    thoughtText: {
         type: String,
         required: true,
         minLength: 1,
@@ -42,7 +41,7 @@ const thoughtSchema = new Schema({
         default: Date.now,
         get: dateFormat,
     },
-    username: {
+    userName: {
         type: String,
         ref: 'user',
         required: true,
@@ -54,6 +53,7 @@ const thoughtSchema = new Schema({
             virtuals: true,
             getters: true,
         },
+        id: false,
     }
 );
 
