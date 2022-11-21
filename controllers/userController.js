@@ -4,13 +4,14 @@ module.exports = {
 
     getUsers(req, res) {
       User.find()
+        .select('-__v')
         .then((userList) => res.json(userList))
         .catch((err) => res.status(500).json(err));
     },
 
     getSingleUser(req, res) {
       User.findOne({ _id: req.params.userId })
-        .select('__v')
+        .select('-__v')
         .populate('friends')
         .then((user) => 
             !user  
@@ -40,8 +41,9 @@ module.exports = {
     addFriend(req, res) {
       User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $addToSet: { friends: friend._id } },
-          { new: true })
+          { $addToSet: { friends: friend._id }},
+          { new: true }
+        )
         .then((user) => 
           !user
             ? res.status(404).json({ message: 'User not found' })
@@ -53,7 +55,8 @@ module.exports = {
     deleteFriend(req, res) {
       User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $pull: { friends: friend._id } })
+          { $pull: { friends: friend._id }}
+        )
         .then((user) =>
           !user
             ? res.status(404).json({ message: 'Friend not found' })
